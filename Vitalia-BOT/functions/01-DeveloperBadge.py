@@ -32,6 +32,7 @@ async def givemebadge(interaction: Interaction):
 
 # Este es el comando de ping pero para los comandos de barra
 
+
 @Vitalia.tree.command()
 async def ping(interaction: Interaction):
     await interaction.response.send_message('pong')
