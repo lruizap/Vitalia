@@ -15,13 +15,14 @@ Vitalia = commands.Bot(command_prefix='V-', intents=discord.Intents.all())
 @Vitalia.event
 # Crearemos un evento para indicar cuando el BOT está online
 async def on_ready():
-    print(f"\n{Vitalia.user} ha cobrado vida\n")
+    print(f"\033[32m\n 🦉 ► {Vitalia.user} ha cobrado vida\n\033[39m")
 
 
 @Vitalia.event
 # Vamos a crear un evento para que imprima los mensajes enviados por pantalla
 async def on_message(message):
-    print(f"{message.author} ha dicho: {message.content}")
+    print(
+        f"\033[34m\n 🧑 ► {message.author} ha dicho: {message.content}\n\033[39m")
 
 
 """ //- COMANDOS -// """
