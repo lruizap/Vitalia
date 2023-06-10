@@ -6,7 +6,9 @@ from dotenv import load_dotenv
 load_dotenv()
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 
-Vitalia = commands.Bot(command_prefix='V-', intents=discord.Intents.all())
+Vitalia = commands.Bot(command_prefix='V-', intents=discord.Intents.all(),
+                       status=discord.Status.dnd,
+                       activity=discord.Game(name="Programando BOT de DISCORD"))
 
 
 """ //- EVENTOS -// """
