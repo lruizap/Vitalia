@@ -23,8 +23,15 @@ async def on_ready():
 @Vitalia.event
 # Vamos a crear un evento para que imprima los mensajes enviados por pantalla
 async def on_message(message):
+    # Verificar que el mensaje no sea del propio bot
+    if message.author == Vitalia.user:
+        return
+
     print(
         f"\033[34m\n 🧑 ► {message.author} ha dicho: {message.content}\n\033[39m")
+
+    # Pasar el mensaje a la funcionalidad de comandos
+    await Vitalia.process_commands(message)
 
 
 """ //- COMANDOS -// """
@@ -35,6 +42,38 @@ async def on_message(message):
 async def ping(ctx):
     # ctx es el canal donde se ha enviado el mensaje
     await ctx.send("pong!")
+
+
+@Vitalia.command()
+async def hola(ctx):
+    await ctx.send("¡Hola! ¡Soy Vitalia, tu bot de Discord!")
+
+
+@Vitalia.command()
+# Embed informativo para utilizar los comandos del bot
+async def helpCommands(ctx):
+    embed = discord.Embed(
+        title="Comandos de Vitalia",
+        description="A continuación se muestran todos los comandos del bot",
+        color=discord.Color.green()
+    )
+
+    embed.set_thumbnail(
+        url="https://icones.pro/wp-content/uploads/2021/05/icone-d-information-vert.png")
+
+    embed.set_author(name="Vitalia")
+
+    # Ordenar en orden alfabético
+    embed.add_field(
+        name="V-helpCommands", value="Vitalia nos dará una guia de sus comandos para que los usemos", inline=False)
+    embed.add_field(
+        name="V-hola", value="Vitalia nos saluda y se presenta", inline=False)
+    embed.add_field(
+        name="V-ping", value="Vitalia nos contesta con un 'pong!'", inline=False)
+
+    embed.set_footer(text="Espero que te haya ayudado")
+
+    await ctx.send(embed=embed)
 
 
 """ //- FIN -// """
