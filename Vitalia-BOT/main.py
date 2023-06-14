@@ -15,13 +15,13 @@ Vitalia = commands.Bot(command_prefix='V-', intents=discord.Intents.all(),
 
 
 @Vitalia.event
-# Crearemos un evento para indicar cuando el BOT está online
+#! Crearemos un evento para indicar cuando el BOT está online
 async def on_ready():
     print(f"\033[32m\n 🦉 ► {Vitalia.user} ha cobrado vida\n\033[39m")
 
 
 @Vitalia.event
-# Vamos a crear un evento para que imprima los mensajes enviados por pantalla
+#! Evento para que imprime los mensajes enviados por pantalla
 async def on_message(message):
     # Verificar que el mensaje no sea del propio bot
     if message.author == Vitalia.user:
@@ -38,20 +38,21 @@ async def on_message(message):
 
 
 @Vitalia.command()
-# Contesta al usuario con un "pong!"
+#! Contesta al usuario con un "pong!"
 async def ping(ctx):
     # ctx es el canal donde se ha enviado el mensaje
     await ctx.send("pong!")
 
 
 @Vitalia.command()
+#! Saluda al usuario que ha enviado el comando
 async def hola(ctx):
     usuario = ctx.message.author.mention
     await ctx.send(f"¡Hola {usuario}! ¡Soy Vitalia, tu bot de Discord!")
 
 
 @Vitalia.command()
-# Embed informativo para utilizar los comandos del bot
+#! Embed informativo para utilizar los comandos del bot
 async def helpCommands(ctx):
     embed = discord.Embed(
         title="Comandos de Vitalia",
@@ -66,9 +67,9 @@ async def helpCommands(ctx):
     embed.add_field(
         name="V-helpCommands", value="Vitalia nos dará una guia de sus comandos para que los usemos", inline=False)
     embed.add_field(
-        name="V-hola", value="Vitalia nos saluda y se presenta", inline=False)
+        name="V-hola", value="Vitalia saluda al usuario que envió el comando", inline=False)
     embed.add_field(
-        name="V-ping", value="Vitalia nos contesta con un 'pong!'", inline=False)
+        name="V-ping", value="Vitalia contesta con un 'pong!'", inline=False)
 
     embed.set_footer(text="Espero que te haya ayudado")
 
