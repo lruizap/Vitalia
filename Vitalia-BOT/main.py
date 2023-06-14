@@ -46,7 +46,8 @@ async def ping(ctx):
 
 @Vitalia.command()
 async def hola(ctx):
-    await ctx.send("¡Hola! ¡Soy Vitalia, tu bot de Discord!")
+    usuario = ctx.message.author.mention
+    await ctx.send(f"¡Hola {usuario}! ¡Soy Vitalia, tu bot de Discord!")
 
 
 @Vitalia.command()
@@ -60,8 +61,6 @@ async def helpCommands(ctx):
 
     embed.set_thumbnail(
         url="https://icones.pro/wp-content/uploads/2021/05/icone-d-information-vert.png")
-
-    embed.set_author(name="Vitalia")
 
     # Ordenar en orden alfabético
     embed.add_field(
