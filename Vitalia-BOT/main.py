@@ -38,6 +38,17 @@ async def on_message(message):
 
 
 @Vitalia.command(
+    description='Vitalia saluda al usuario mencionandolo',
+    help='Esta es la ayuda para el comando "V-hola"',
+    brief='Vitalia saluda al usuario mencionandolo'
+)
+#! Saluda al usuario que ha enviado el comando
+async def hola(ctx):
+    usuario = ctx.message.author.mention
+    await ctx.send(f"¡Hola {usuario}! ¡Soy Vitalia, tu bot de Discord!")
+
+
+@Vitalia.command(
     aliases=['p'],
     description='Vitalia contesta con un "pong!"',
     help='Esta es la ayuda para el comando "V-ping"',
@@ -50,14 +61,15 @@ async def ping(ctx):
 
 
 @Vitalia.command(
-    description='Vitalia saluda al usuario mencionandolo',
-    help='Esta es la ayuda para el comando "V-hola"',
-    brief='Vitalia saluda al usuario mencionandolo'
+    aliases=['+'],
+    description='Vitalia suma dos numeros',
+    help='Esta es la ayuda para el comando "V-sum"',
+    brief='Vitalia suma dos numeros'
 )
-#! Saluda al usuario que ha enviado el comando
-async def hola(ctx):
+#! Suma dos números
+async def sum(ctx, one: int, two: int):
     usuario = ctx.message.author.mention
-    await ctx.send(f"¡Hola {usuario}! ¡Soy Vitalia, tu bot de Discord!")
+    await ctx.send(f"{usuario}, el resultado es: {one + two}")
 
 
 @Vitalia.command(
@@ -68,9 +80,10 @@ async def hola(ctx):
 )
 #! Embed informativo para utilizar los comandos del bot
 async def helpCommands(ctx):
+    usuario = ctx.message.author.mention
     embed = discord.Embed(
         title="Comandos de Vitalia",
-        description="A continuación se muestran todos los comandos del bot",
+        description=f"A continuación, {usuario} se muestran todos los comandos del bot",
         color=discord.Color.green()
     )
 
@@ -88,6 +101,18 @@ async def helpCommands(ctx):
     embed.set_footer(text="Espero que te haya ayudado")
 
     await ctx.send(embed=embed)
+
+
+""" //- ERRORES -// """
+
+
+@sum.error
+#! Manejo de errores del comando "sum"
+async def sum_error(ctx, error):
+    usuario = ctx.message.author.mention
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send(f"Por favor, {usuario}, comprueba los valores introducidos")
+
 
 """ //- FIN -// """
 
