@@ -38,18 +38,6 @@ async def on_message(message):
 
 
 @Vitalia.command()
-# Contesta al usuario con un "pong!"
-async def ping(ctx):
-    # ctx es el canal donde se ha enviado el mensaje
-    await ctx.send("pong!")
-
-
-@Vitalia.command()
-async def hola(ctx):
-    await ctx.send("¡Hola! ¡Soy Vitalia, tu bot de Discord!")
-
-
-@Vitalia.command()
 # Embed informativo para utilizar los comandos del bot
 async def helpCommands(ctx):
     usuario = ctx.message.author.mention
