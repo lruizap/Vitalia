@@ -1,4 +1,4 @@
-# [Vitalia](https://lruizap.notion.site/Vitalia-BOT-8f231d10245e424cbe30c04f98fd93de?pvs=4)
+# Vitalia
 
 ## Introducción
 
