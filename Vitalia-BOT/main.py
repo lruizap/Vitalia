@@ -1,10 +1,9 @@
+import settings
 import discord
 from discord.ext import commands
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
-DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+logger = settings.logging.getLogger("Vitalia")
+
 
 Vitalia = commands.Bot(command_prefix='V-', intents=discord.Intents.all(),
                        status=discord.Status.dnd,
@@ -17,6 +16,7 @@ Vitalia = commands.Bot(command_prefix='V-', intents=discord.Intents.all(),
 @Vitalia.event
 #! Crearemos un evento para indicar cuando el BOT está online
 async def on_ready():
+    logger.info(f"BOT: {Vitalia.user} (ID: {Vitalia.user.id})")
     print(f"\033[32m\n 🦉 ► {Vitalia.user} ha cobrado vida\n\033[39m")
 
 
@@ -37,21 +37,35 @@ async def on_message(message):
 """ //- COMANDOS -// """
 
 
-@Vitalia.command()
+@Vitalia.command(
+    aliases=['p'],
+    description='Vitalia contesta con un "pong!"',
+    help='Esta es la ayuda para el comando "V-ping"',
+    brief='Vitalia contesta con un "pong!"'
+)
 #! Contesta al usuario con un "pong!"
 async def ping(ctx):
     # ctx es el canal donde se ha enviado el mensaje
     await ctx.send("pong!")
 
 
-@Vitalia.command()
+@Vitalia.command(
+    description='Vitalia saluda al usuario mencionandolo',
+    help='Esta es la ayuda para el comando "V-hola"',
+    brief='Vitalia saluda al usuario mencionandolo'
+)
 #! Saluda al usuario que ha enviado el comando
 async def hola(ctx):
     usuario = ctx.message.author.mention
     await ctx.send(f"¡Hola {usuario}! ¡Soy Vitalia, tu bot de Discord!")
 
 
-@Vitalia.command()
+@Vitalia.command(
+    aliases=['hc'],
+    description='A continuación se muestran todos los comandos del bot',
+    help='Embed informativo para utilizar los comandos del bot',
+    brief='Embed informativo para utilizar los comandos del bot'
+)
 #! Embed informativo para utilizar los comandos del bot
 async def helpCommands(ctx):
     embed = discord.Embed(
@@ -75,12 +89,10 @@ async def helpCommands(ctx):
 
     await ctx.send(embed=embed)
 
-
 """ //- FIN -// """
-
 
 # Ahora activamos el bot con los comandos creados
 # Para que el bot lea los comandos debemos introducir la token
 # Esta debe ser la última línea del código
 
-Vitalia.run(DISCORD_TOKEN)
+Vitalia.run(settings.DISCORD_TOKEN, root_logger=True)
