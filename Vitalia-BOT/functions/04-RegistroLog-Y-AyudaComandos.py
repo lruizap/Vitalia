@@ -68,9 +68,10 @@ async def hola(ctx):
 )
 #! Embed informativo para utilizar los comandos del bot
 async def helpCommands(ctx):
+    usuario = ctx.message.author.mention
     embed = discord.Embed(
         title="Comandos de Vitalia",
-        description="A continuación se muestran todos los comandos del bot",
+        description=f"A continuación, {usuario} se muestran todos los comandos del bot",
         color=discord.Color.green()
     )
 
