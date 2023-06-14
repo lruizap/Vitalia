@@ -52,24 +52,23 @@ async def hola(ctx):
 @Vitalia.command()
 # Embed informativo para utilizar los comandos del bot
 async def helpCommands(ctx):
+    usuario = ctx.message.author.mention
     embed = discord.Embed(
         title="Comandos de Vitalia",
-        description="A continuación se muestran todos los comandos del bot",
+        description=f"A continuación, {usuario} se muestran todos los comandos del bot",
         color=discord.Color.green()
     )
 
     embed.set_thumbnail(
         url="https://icones.pro/wp-content/uploads/2021/05/icone-d-information-vert.png")
 
-    embed.set_author(name="Vitalia")
-
     # Ordenar en orden alfabético
     embed.add_field(
         name="V-helpCommands", value="Vitalia nos dará una guia de sus comandos para que los usemos", inline=False)
     embed.add_field(
-        name="V-hola", value="Vitalia nos saluda y se presenta", inline=False)
+        name="V-hola", value="Vitalia saluda al usuario que envió el comando", inline=False)
     embed.add_field(
-        name="V-ping", value="Vitalia nos contesta con un 'pong!'", inline=False)
+        name="V-ping", value="Vitalia contesta con un 'pong!'", inline=False)
 
     embed.set_footer(text="Espero que te haya ayudado")
 
