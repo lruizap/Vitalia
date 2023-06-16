@@ -131,3 +131,4 @@ async def divide_error(ctx, error):
     usuario = ctx.message.author.mention
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send(f"Por favor, {usuario}, comprueba los valores introducidos")
+
