@@ -12,6 +12,14 @@ Vitalia = commands.Bot(command_prefix='V-', intents=discord.Intents.all(),
                        activity=discord.Game(name="Programando BOT de DISCORD"))
 
 
+""" //- FUNCIONES -// """
+
+
+#! Esta función comprueba si el usuario que envió el mensaje es el dueño del servidor
+async def is_owner(ctx):
+    return ctx.author.id == ctx.guild.owner_id
+
+
 """ //- EVENTOS -// """
 
 
@@ -53,9 +61,11 @@ async def on_message(message):
     help='Esta es la ayuda para el comando "V-reload"',
     brief='Vitalia reinicia la categoría indicada'
 )
+@commands.check(is_owner)
 #! Comando para reiniciar la categoría
 async def reload(ctx, cog: str):
     await Vitalia.reload_extension(f"cogs.{cog.lower()}")
+    await ctx.send("Recargada la categoría")
 
 
 @Vitalia.command(
@@ -77,8 +87,12 @@ async def ping(ctx):
 #! Manejo de errores del comando "reload"
 async def reload_error(ctx, error):
     usuario = ctx.message.author.mention
+
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send(f"Por favor, {usuario}, introduzca la categoría que quiere reiniciar")
+
+    if isinstance(error, commands.CommandError):
+        await ctx.send(f"{usuario}, No tiene permisos para realizar el comando")
 
 
 """ //- FIN -// """
