@@ -65,7 +65,7 @@ async def on_message(message):
 #! Comando para reiniciar la categoría
 async def reload(ctx, cog: str):
     await Vitalia.reload_extension(f"cogs.{cog.lower()}")
-    await ctx.send("Recargada la categoría")
+    await ctx.send(f'La categoría "{cog}" ha sido recagada con éxito')
 
 
 @Vitalia.command(
