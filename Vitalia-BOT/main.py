@@ -1,6 +1,8 @@
 import settings
 import discord
+from cogs.greetings import Greetings
 from discord.ext import commands
+
 
 logger = settings.logging.getLogger("Vitalia")
 
@@ -23,6 +25,8 @@ async def on_ready():
         if commands_file.name != "__init__.py":
             await Vitalia.load_extension(f"commands.{commands_file.name[:-3]}")
 
+    await Vitalia.load_extension('cogs.greetings')
+
 
 @Vitalia.event
 #! Evento para que imprime los mensajes enviados por pantalla
@@ -39,17 +43,6 @@ async def on_message(message):
 
 
 """ //- COMANDOS -// """
-
-
-@Vitalia.command(
-    description='Vitalia saluda al usuario mencionandolo',
-    help='Esta es la ayuda para el comando "V-hola"',
-    brief='Vitalia saluda al usuario mencionandolo'
-)
-#! Saluda al usuario que ha enviado el comando
-async def hola(ctx):
-    usuario = ctx.message.author.mention
-    await ctx.send(f"¡Hola {usuario}! ¡Soy Vitalia, tu bot de Discord!")
 
 
 @Vitalia.command(
