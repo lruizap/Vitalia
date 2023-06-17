@@ -25,7 +25,9 @@ async def on_ready():
         if commands_file.name != "__init__.py":
             await Vitalia.load_extension(f"commands.{commands_file.name[:-3]}")
 
-    await Vitalia.load_extension('cogs.greetings')
+    for cogs_file in settings.COGS_DIR.glob("*.py"):
+        if cogs_file.name != "__init__.py":
+            await Vitalia.load_extension(f"cogs.{cogs_file.name[:-3]}")
 
 
 @Vitalia.event
@@ -46,6 +48,17 @@ async def on_message(message):
 
 
 @Vitalia.command(
+    aliases=['r'],
+    description='Vitalia reinicia la categoría indicada',
+    help='Esta es la ayuda para el comando "V-reload"',
+    brief='Vitalia reinicia la categoría indicada'
+)
+#! Comando para reiniciar la categoría
+async def reload(ctx, cog: str):
+    await Vitalia.reload_extension(f"cogs.{cog.lower()}")
+
+
+@Vitalia.command(
     aliases=['p'],
     description='Vitalia contesta con un "pong!"',
     help='Esta es la ayuda para el comando "V-ping"',
@@ -58,6 +71,14 @@ async def ping(ctx):
 
 
 """ //- ERRORES -// """
+
+
+@reload.error
+#! Manejo de errores del comando "reload"
+async def reload_error(ctx, error):
+    usuario = ctx.message.author.mention
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send(f"Por favor, {usuario}, introduzca la categoría que quiere reiniciar")
 
 
 """ //- FIN -// """
