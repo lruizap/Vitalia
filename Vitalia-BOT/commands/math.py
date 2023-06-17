@@ -94,6 +94,9 @@ async def divide(ctx, one: int, two: int):
     await ctx.send(f"{usuario}, el resultado es: {one / two}")
 
 
+""" //- SETUP -// """
+
+
 async def setup(Vitalia):
     Vitalia.add_command(math)
 
@@ -131,4 +134,3 @@ async def divide_error(ctx, error):
     usuario = ctx.message.author.mention
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send(f"Por favor, {usuario}, comprueba los valores introducidos")
-
