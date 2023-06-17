@@ -12,6 +12,8 @@ BASE_DIR = pathlib.Path(__file__).parent
 
 COMMANDS_DIR = BASE_DIR / "commands"
 
+COGS_DIR = BASE_DIR / "cogs"
+
 LOGGING_CONFIG = {
     "version": 1,
     "disabled_existing_loggers": False,
