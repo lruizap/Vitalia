@@ -39,3 +39,10 @@ async def helpCommands(ctx):
     embed.set_footer(text="Espero que te haya ayudado")
 
     await ctx.send(embed=embed)
+
+
+""" //- SETUP -// """
+
+
+async def setup(Vitalia):
+    Vitalia.add_command(helpCommands)
