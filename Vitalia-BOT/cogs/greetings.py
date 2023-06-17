@@ -7,9 +7,9 @@ class Greetings(commands.Cog):
     def __init__(self, Vitalia):
         self.Vitalia = Vitalia
 
-    @commands.Cog.listener()
-    async def on_message(self, message: discord.Message):
-        await message.add_reaction('👋')
+    # @commands.Cog.listener()
+    # async def on_message(self, message: discord.Message):
+    #     await message.add_reaction('👋')
 
     @commands.command(
         description='Vitalia saluda al usuario mencionandolo',
