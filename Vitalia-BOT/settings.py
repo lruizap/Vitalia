@@ -1,5 +1,6 @@
 import pathlib
 import os
+import discord
 import logging
 from logging.config import dictConfig
 from dotenv import load_dotenv
@@ -7,6 +8,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+
+GUILDS_ID = discord.Object(id=int(os.getenv('GUILDS_ID')))
 
 BASE_DIR = pathlib.Path(__file__).parent
 

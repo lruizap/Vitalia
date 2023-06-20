@@ -31,7 +31,7 @@ async def is_owner(ctx):
 #! Crearemos un evento para indicar cuando el BOT está online
 async def on_ready():
     logger.info(f"BOT: {Vitalia.user} (ID: {Vitalia.user.id})")
-    print(f"\033[32m\n 🦉 ► {Vitalia.user} ha cobrado vida\n\033[39m")
+    logger.info(f"GUILD ID: {Vitalia.guilds[0].id}")
 
     for commands_file in settings.COMMANDS_DIR.glob("*.py"):
         if commands_file.name != "__init__.py":
@@ -40,6 +40,10 @@ async def on_ready():
     for cogs_file in settings.COGS_DIR.glob("*.py"):
         if cogs_file.name != "__init__.py":
             await Vitalia.load_extension(f"cogs.{cogs_file.name[:-3]}")
+
+    await Vitalia.tree.sync(guild=settings.GUILDS_ID)
+
+    print(f"\033[32m\n 🦉 ► {Vitalia.user} ha cobrado vida\n\033[39m")
 
 
 @Vitalia.event
@@ -83,7 +87,7 @@ async def reload(ctx, cog: str):
     await ctx.send(f'La categoría "{cog}" ha sido recagada con éxito')
 
 
-@Vitalia.command(
+@Vitalia.hybrid_command(
     aliases=['p'],
     description='Vitalia contesta con un "pong!"',
     help='Esta es la ayuda para el comando "V-ping"',
@@ -92,8 +96,28 @@ async def reload(ctx, cog: str):
 #! Contesta al usuario con un "pong!"
 async def ping(ctx):
     # ctx es el canal donde se ha enviado el mensaje
-    # con ctx podemos hacer que el mensaje de respuesta lo de por privado
-    await ctx.message.author.send("pong!")
+
+    # con ctx.message.author.send() podemos hacer que el mensaje de respuesta lo de por privado
+    # await ctx.message.author.send("pong!")
+
+    await ctx.send("pong!")
+
+
+@Vitalia.tree.command(
+    description='Vitalia contesta con un "ciao!"',
+    name="saludos",
+)
+#! Contesta al usuario con un "ciao!"
+async def ciao(interaction: discord.Interaction):
+    await interaction.response.send_message(f"Ciao! {interaction.user.mention}", ephemeral=True)
+
+
+@Vitalia.tree.command(
+    description='Vitalia contesta con un "ciao!"',
+)
+#! Contesta al usuario con un "ciao!"
+async def ciao(interaction: discord.Interaction):
+    await interaction.response.send_message(f"Ciao! {interaction.user.mention}", ephemeral=True)
 
 
 """ //- ERRORES -// """
